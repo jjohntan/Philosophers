@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jetan <jetan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/18 17:00:42 by jetan             #+#    #+#             */
-/*   Updated: 2024/11/18 18:55:41 by jetan            ###   ########.fr       */
+/*   Created: 2024/11/18 18:12:28 by jetan             #+#    #+#             */
+/*   Updated: 2024/11/18 18:56:11 by jetan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int main(int ac, char *av[])
-{ 
-	if (ac != 5 && ac != 6)
+void	validate_arg(char **av)
+{
+	int	i;
+	
+	i = 0;
+	while (av[++i])
 	{
-		printf("Wrong number of argument\n");
-		return (1);
+		if (!ft_isdigit(av[i]))
+		{
+			printf("Invalid argument\n");
+			return ;
+		}
+		i++;
 	}
-	validate_arg(av);
 }
