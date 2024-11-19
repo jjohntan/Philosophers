@@ -2,6 +2,7 @@
 # define PHILO_H
 
 #include <stdio.h>
+#include <pthread.h>
 
 typedef struct s_philo
 {
@@ -22,7 +23,7 @@ typedef struct s_philo
 	pthread_mutex_t	*write_lock;
 	pthread_mutex_t	*dead_lock;
 	pthread_mutex_t	*meal_lock;
-}	t_philo;
+}					t_philo;
 
 typedef struct s_program
 {
@@ -30,7 +31,7 @@ typedef struct s_program
 	pthread_mutex_t	dead_lock;
 	pthread_mutex_t	meal_lock;
 	pthread_mutex_t	write_lock;
-	t_philo	*philos;
-}	t_program;
+	t_philo			*philos;
+}					t_program;
 
 #endif
