@@ -12,10 +12,15 @@
 
 #include "philo.h"
 
-void	validate_arg(char **av)
+void	validate_arg(int ac, char **av)
 {
 	int	i;
 	
+	if (ac != 5 && ac != 6)
+	{
+		printf("Wrong number of argument\n");
+		return ;
+	}
 	i = 0;
 	while (av[++i])
 	{
