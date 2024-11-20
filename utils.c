@@ -12,23 +12,25 @@
 
 #include "philo.h"
 
-void	validate_arg(int ac, char **av)
+int	validate_arg(int ac, char **av)
 {
-	int	i;
+	int	arg;
+	int	index;
 	
-	if (ac != 5 && ac != 6)
+	arg = 1;
+	while (arg < ac)
 	{
-		printf("Wrong number of argument\n");
-		return ;
-	}
-	i = 0;
-	while (av[++i])
-	{
-		if (!ft_isdigit(av[i]))
+		index = 0;
+		while (av[arg][index])
 		{
-			printf("Invalid argument\n");
-			return ;
+			if (!ft_isdigit(av[arg][index]))
+			{
+				printf("Invalid argument\n");
+				return (0);
+			}
+			index++;
 		}
-		i++;
+		arg++;
 	}
+	return (1);
 }

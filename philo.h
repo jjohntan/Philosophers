@@ -34,4 +34,11 @@ typedef struct s_program
 	t_philo			*philos;
 }					t_program;
 
+void	validate_arg(int ac, char **av);
+void	init(t_philo *data, int ac, const char *av[]);
+
+
+int	ft_isdigit(int c);
+int	ft_atoi(const char *str);
+
 #endif
