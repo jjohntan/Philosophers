@@ -32,7 +32,7 @@ int main(int ac, const char *av[])
 	if (ac != 5 && ac != 6)
 	{
 		printf("Wrong number of argument\n");
-		return ;
+		return (1);
 	}
 	if (validate_arg(ac, av) == 0)
 		return (1);

@@ -15,20 +15,14 @@
 int	validate_arg(int ac, char **av)
 {
 	int	arg;
-	int	index;
 	
 	arg = 1;
 	while (arg < ac)
 	{
-		index = 0;
-		while (av[arg][index])
+		if (!ft_isdigit(av[arg]) || ft_atoi(av[arg]) <= 0)
 		{
-			if (!ft_isdigit(av[arg][index]))
-			{
-				printf("Invalid argument\n");
-				return (0);
-			}
-			index++;
+			printf("Invalid argument\n");
+			return (0);
 		}
 		arg++;
 	}
