@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-void	data_init(t_philo *data, int ac, const char *av[])
+void	init_data(t_philo *data, int ac, const char *av[])
 {
 	if (ac == 6)
 		data->num_of_times_to_eat = ft_atoi(av[5]);
@@ -22,13 +22,18 @@ void	data_init(t_philo *data, int ac, const char *av[])
 		data->time_to_die = ft_atoi(av[2]);
 		data->time_to_eat = ft_atoi(av[3]);
 		data->time_to_sleep = ft_atoi(av[4]);
-		pthread_mutex_init(&data->write_lock, NULL);
 	}
 }
 
-void	create_thread(t_philo *data)
+void	init_philo(t_philo *data)
 {
+	int	i;
 
+	i = 0;
+	while (i < data->num_of_philo)
+	{
+		philos[i].id = i + 1;
+	}
 }
 
 int main(int ac, const char *av[])
