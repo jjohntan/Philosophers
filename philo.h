@@ -25,14 +25,14 @@ typedef struct s_philo
 	pthread_mutex_t	*meal_lock;
 }					t_philo;
 
-typedef struct s_program
+typedef struct s_data
 {
 	int	dead_flag;
 	pthread_mutex_t	dead_lock;
 	pthread_mutex_t	meal_lock;
 	pthread_mutex_t	write_lock;
 	t_philo			*philos;
-}					t_program;
+}					t_data;
 
 void	validate_arg(int ac, char **av);
 void	data_init(t_philo *data, int ac, const char *av[]);
