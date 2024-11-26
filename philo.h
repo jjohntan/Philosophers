@@ -34,11 +34,11 @@ typedef struct s_data
 	t_philo			*philos;
 }					t_data;
 
-void	validate_arg(int ac, char **av);
+int	validate_arg(int ac, const char **av);
 void	data_init(t_philo *data, int ac, const char *av[]);
 
 
-int	ft_isdigit(int c);
+int	ft_isdigit(const char *str);
 int	ft_atoi(const char *str);
 
 #endif

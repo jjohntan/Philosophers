@@ -10,12 +10,12 @@ SRCS = main.c \
 OBJS = $(SRCS:.c=.o)
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -Iinc -Ilibft
+CFLAGS = -Wall -Wextra -Werror
 FSANTIZE = -fsanitize=address -g3
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -Llibft -lft -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 %.o: src/%.c
 	$(CC) $(CFLAGS) -c $< -o $@

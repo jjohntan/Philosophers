@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-int	ft_isdigit(char *str)
+int	ft_isdigit(const char *str)
 {
 	int	i;
 

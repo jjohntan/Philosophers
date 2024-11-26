@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-int	validate_arg(int ac, char **av)
+int	validate_arg(int ac, const char **av)
 {
 	int	arg;
 	

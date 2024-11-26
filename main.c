@@ -25,23 +25,23 @@ void	init_data(t_philo *philo, int ac, const char *av[])
 	}
 }
 
-void	init_philo(t_philo *philo)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->num_of_philo)
-	{
-		data->philos[i].id = i + 1;
-		i++;
-	}
-	printf("%d\n", data->philos[i].id);
-}
+// void	init_philo(t_philo *philo)
+// {
+// 	int	i;
+//
+// 	i = 0;
+// 	while (i < philo->num_of_philo)
+// 	{
+// 		philo->philos[i].id = i + 1;
+// 		i++;
+// 	}
+// 	printf("%d\n", philos[i].id);
+// }
 
 int main(int ac, const char *av[])
 {
 	t_philo	philo;
-	t_data data;
+	// t_data data;
 
 	if (ac != 5 && ac != 6)
 	{
@@ -51,5 +51,5 @@ int main(int ac, const char *av[])
 	if (validate_arg(ac, av) == 0)
 		return (1);
 	init_data(&philo, ac, av);
-	init_philo(&philo);
+	// init_philo(&philo);
 }
