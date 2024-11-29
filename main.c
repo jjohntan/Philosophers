@@ -53,22 +53,50 @@ void	init_fork(t_data *data, t_philo *philo)
 		i++;
 	}
 }
-// void	init_philo(t_philo *philo)
-// {
-// 	int	i;
-//
-// 	i = 0;
-// 	while (i < philo->num_of_philo)
-// 	{
-// 		philo->philos[i].id = i + 1;
-// 		i++;
-// 	}
-// 	printf("%d\n", philos[i].id);
-// }
+void	init_philo(t_philo *philo, t_data *data)
+{
+	int	i;
+
+	i = 0;
+	printf("%d\n", philo->num_of_philo);
+	while (i < philo->num_of_philo)
+	{
+		philo[i].id = i + 1;
+		philo[i].eating = 0;
+		philo[i].meals_eaten = 0;
+		// philo[i].last_meal = get_time;
+		// philo[i].start_time = get_time;
+		philo[i].done_or_dead = 0;
+		philo[i].write_lock = &data->write_lock;
+		philo[i].dead_lock = &data->dead_lock;
+		philo[i].meal_lock = &data->meal_lock;
+		i++;
+	}
+}
+
+void	create_thread(t_philo *philo)
+{
+	int	i;
+
+	i = 0;
+	while (i < philo->num_of_philo)
+	{
+		philo[i].thread = pthread_create(&philo[i].thread, NULL, &philo_routine, &philo[i]);
+		i++;
+	}
+}
+
+void	*philo_routine(void *data)
+{
+	t_philo *philo;
+	philo = (t_philo *)data;
+	printf("%d\n", philo->id);
+	return NULL;
+}
 
 int main(int ac, char **av)
 {
-	t_philo	philo;
+	t_philo	*philo;
 	t_data data;
 
 	if (ac != 5 && ac != 6)
@@ -78,8 +106,11 @@ int main(int ac, char **av)
 	}
 	if (validate_arg(ac, av) == 0)
 		return (1);
-	init_arg(&philo, ac, av);
-	init_data(&data, &philo);
-	init_fork(&data, &philo);
-	// init_philo(&philo);
+	philo = malloc(sizeof(t_philo) * ft_atoi(av[1]));
+	init_arg(philo, ac, av);
+	init_data(&data, philo);
+	init_fork(&data, philo);
+	init_philo(philo, &data);
+	create_thread(philo);
+	sleep(5);
 }

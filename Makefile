@@ -10,8 +10,8 @@ SRCS = main.c \
 OBJS = $(SRCS:.c=.o)
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
 FSANTIZE = -fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror $(FSANTIZE)
 all: $(NAME)
 
 $(NAME): $(OBJS)
