@@ -6,13 +6,13 @@
 /*   By: jetan <jetan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 18:12:28 by jetan             #+#    #+#             */
-/*   Updated: 2024/11/18 18:56:11 by jetan            ###   ########.fr       */
+/*   Updated: 2024/11/28 16:49:51 by jetan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	validate_arg(int ac, const char **av)
+int	validate_arg(int ac, char **av)
 {
 	int	arg;
 	
