@@ -29,6 +29,7 @@ typedef struct s_philo
 
 typedef struct s_data
 {
+	int	num_of_philo;
 	int	dead_flag;
 	pthread_mutex_t	dead_lock;
 	pthread_mutex_t	meal_lock;

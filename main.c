@@ -53,6 +53,7 @@ void	init_fork(t_data *data, t_philo *philo)
 		i++;
 	}
 }
+
 void	init_philo(t_philo *philo, t_data *data)
 {
 	int	i;
@@ -81,7 +82,14 @@ void	create_thread(t_philo *philo)
 	i = 0;
 	while (i < philo->num_of_philo)
 	{
-		philo[i].thread = pthread_create(&philo[i].thread, NULL, &philo_routine, &philo[i]);
+		philo[i].thread = pthread_create(&philo[i].thread, NULL, &philo_routine,
+								   &philo[i]);
+		i++;
+	}
+	i = 0;
+	while (i < philo->num_of_philo)
+	{
+		pthread_join(philo[i].thread, NULL);
 		i++;
 	}
 }
