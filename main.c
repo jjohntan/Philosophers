@@ -93,12 +93,21 @@ void	create_thread(t_philo *philo)
 		i++;
 	}
 }
+void	print_status(t_philo *philo)
+{
+	pthread_mutex_lock(philo->write_lock);
+	pthread_mutex_unlock(philo->write_lock);
+}
 
 void	*philo_routine(void *data)
 {
 	t_philo *philo;
 	philo = (t_philo *)data;
 	printf("%d\n", philo->id);
+	while (1)
+	{
+		print_status(philo);
+	}
 	return NULL;
 }
 
