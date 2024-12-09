@@ -5,6 +5,7 @@
 #include <pthread.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <sys/time.h>
 
 typedef struct s_philo
 {
@@ -48,5 +49,6 @@ void	*philo_routine(void *philo);
 
 int	ft_isdigit(const char *str);
 int	ft_atoi(const char *str);
+time_t	get_time(void);
 
 #endif

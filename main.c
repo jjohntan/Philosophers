@@ -6,7 +6,7 @@
 /*   By: jetan <jetan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 17:00:42 by jetan             #+#    #+#             */
-/*   Updated: 2024/11/21 17:43:27 by jetan            ###   ########.fr       */
+/*   Updated: 2024/12/09 21:03:20 by jetan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,25 @@ void	create_thread(t_philo *philo)
 		i++;
 	}
 }
-void	print_status(t_philo *philo)
+
+time_t	get_time(void)
 {
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+}
+
+void	print_status(t_philo *philo, int id, char *str)
+{
+	int	time;
+	
+	time = get_time();
 	pthread_mutex_lock(philo->write_lock);
+	printf("%d %s\n", id, str);
 	pthread_mutex_unlock(philo->write_lock);
 }
+
 
 void	*philo_routine(void *data)
 {
@@ -106,7 +120,7 @@ void	*philo_routine(void *data)
 	printf("%d\n", philo->id);
 	while (1)
 	{
-		print_status(philo);
+		print_status(philo, philo->id, "is thinking");
 	}
 	return NULL;
 }
