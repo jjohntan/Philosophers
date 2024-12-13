@@ -51,4 +51,5 @@ int	ft_isdigit(const char *str);
 int	ft_atoi(const char *str);
 time_t	get_time(void);
 
+void	eat(t_philo *philo);
 #endif

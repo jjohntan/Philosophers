@@ -4,6 +4,7 @@ NAME = philo
 SRCS = main.c \
 	   ft_atoi.c \
 	   ft_isdigit.c \
+	   init.c \
 	   utils.c
 
 
