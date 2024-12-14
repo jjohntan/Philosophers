@@ -6,7 +6,7 @@
 /*   By: jetan <jetan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:40:30 by jetan             #+#    #+#             */
-/*   Updated: 2024/12/13 18:43:09 by jetan            ###   ########.fr       */
+/*   Updated: 2024/12/14 18:59:33 by jetan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	init_philo(t_philo *philo, t_data *data)
 		philo[i].id = i + 1;
 		philo[i].eating = 0;
 		philo[i].meals_eaten = 0;
-		// philo[i].last_meal = get_time;
-		// philo[i].start_time = get_time;
+		philo[i].last_meal = get_current_time();
+		philo[i].start_time = get_current_time();
 		philo[i].done_or_dead = 0;
 		philo[i].write_lock = &data->write_lock;
 		philo[i].dead_lock = &data->dead_lock;
@@ -36,20 +36,23 @@ void	init_philo(t_philo *philo, t_data *data)
 void	init_fork(t_data *data, t_philo *philo)
 {
 	int	i;
+	pthread_mutex_t	*forks;
 
 	i = 0;
+	forks = malloc(sizeof(pthread_mutex_t) * philo->num_of_philo);
 	while (i < philo->num_of_philo)
 	{
-		pthread_mutex_init(&data->forks[i], NULL);
+		pthread_mutex_init(&forks[i], NULL);
 		i++;
 	}
 	i = 0;
 	while (i < philo->num_of_philo)
 	{
-		philo->l_fork = &data->forks[i];
-		philo->r_fork = &data->forks[(i + 1) % philo->num_of_philo];
+		philo->l_fork = &forks[i];
+		philo->r_fork = &forks[(i + 1) % philo->num_of_philo];
 		i++;
 	}
+	data->forks = forks;
 }
 
 void	init_data(t_data *data, t_philo *philo)
@@ -59,7 +62,7 @@ void	init_data(t_data *data, t_philo *philo)
 	pthread_mutex_init(&data->dead_lock, NULL);
 	pthread_mutex_init(&data->meal_lock, NULL);
 	pthread_mutex_init(&data->write_lock, NULL);
-	data->forks = malloc(sizeof(pthread_mutex_t) * philo->num_of_philo);
+	// data->forks = malloc(sizeof(pthread_mutex_t) * philo->num_of_philo);
 }
 
 void	init_arg(t_philo *philo, int ac, char **av)

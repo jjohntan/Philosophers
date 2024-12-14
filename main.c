@@ -6,7 +6,7 @@
 /*   By: jetan <jetan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 17:00:42 by jetan             #+#    #+#             */
-/*   Updated: 2024/12/13 18:48:43 by jetan            ###   ########.fr       */
+/*   Updated: 2024/12/13 18:48:43jetan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,48 +31,48 @@ void	create_thread(t_philo *philo)
 	}
 }
 
-time_t	get_time(void)
-{
-	struct timeval	time;
-
-	gettimeofday(&time, NULL);
-	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
-}
-
 void	print_status(t_philo *philo, int id, char *str)
 {
 	int	time;
 	
-	time = get_time() - philo->start_time;
+	time = get_current_time() - philo->start_time;
 	pthread_mutex_lock(philo->write_lock);
 	printf("%d %d %s\n", time, id, str);
 	pthread_mutex_unlock(philo->write_lock);
 }
 
-void	eat(t_philo *philo)
+void	ft_sleep(t_philo *philo)
+{
+	print_status(philo, philo->id, "is sleeping");
+	ft_usleep(philo->time_to_sleep);
+}
+
+void	ft_eat(t_philo *philo)
 {
 	pthread_mutex_lock(philo->r_fork);
+	print_status(philo, philo->id, "has taken a fork");
 	pthread_mutex_lock(philo->l_fork);
 	print_status(philo, philo->id, "has taken a fork");
-	print_status(philo, philo->id, "has taken a fork");
+	print_status(philo, philo->id, "is eating");
 	pthread_mutex_lock(philo->meal_lock);
 	philo->eating = 1;
-	philo->last_meal = get_time();
+	philo->last_meal = get_current_time();
 	philo->meals_eaten++;
 	philo->eating = 0;
 	pthread_mutex_unlock(philo->meal_lock);
+	ft_usleep(philo->time_to_eat);
+	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
-	pthread_mutex_unlock(philo->f_fork);
 }
 
 void	*philo_routine(void *data)
 {
 	t_philo *philo;
+
 	philo = (t_philo *)data;
-	printf("%d\n", philo->id);
 	while (1)
 	{
-		eat(philo);
+		ft_eat(philo);
 		print_status(philo, philo->id, "is thinking");
 	}
 	return NULL;
