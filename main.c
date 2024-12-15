@@ -65,17 +65,29 @@ void	ft_eat(t_philo *philo)
 	pthread_mutex_unlock(philo->r_fork);
 }
 
+int	done_loop(t_philo *philo)
+{
+	pthread_mutex_lock(philo->dead_lock);
+	if (*philo->done_or_dead == 1)
+		return (pthread_mutex_unlock(philo->dead_lock), 1);
+	pthread_mutex_unlock(philo->dead_lock);
+	return (0);
+}
+
 void	*philo_routine(void *data)
 {
 	t_philo *philo;
 
 	philo = (t_philo *)data;
+	if (philo->id % 2 == 0)
+		ft_usleep(1);
 	while (1)
 	{
 		ft_eat(philo);
+		ft_sleep(philo);
 		print_status(philo, philo->id, "is thinking");
 	}
-	return NULL;
+	return (data);
 }
 
 int main(int ac, char **av)

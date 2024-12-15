@@ -54,5 +54,6 @@ size_t	get_current_time(void);
 void	ft_eat(t_philo *philo);
 int	ft_usleep(size_t milliseconds);
 void	ft_sleep(t_philo *philo);
+int	done_loop(t_philo *philo);
 
 #endif

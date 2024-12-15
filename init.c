@@ -25,7 +25,7 @@ void	init_philo(t_philo *philo, t_data *data)
 		philo[i].meals_eaten = 0;
 		philo[i].last_meal = get_current_time();
 		philo[i].start_time = get_current_time();
-		philo[i].done_or_dead = 0;
+		philo[i].done_or_dead = &data->dead_flag;
 		philo[i].write_lock = &data->write_lock;
 		philo[i].dead_lock = &data->dead_lock;
 		philo[i].meal_lock = &data->meal_lock;
@@ -62,7 +62,6 @@ void	init_data(t_data *data, t_philo *philo)
 	pthread_mutex_init(&data->dead_lock, NULL);
 	pthread_mutex_init(&data->meal_lock, NULL);
 	pthread_mutex_init(&data->write_lock, NULL);
-	// data->forks = malloc(sizeof(pthread_mutex_t) * philo->num_of_philo);
 }
 
 void	init_arg(t_philo *philo, int ac, char **av)
