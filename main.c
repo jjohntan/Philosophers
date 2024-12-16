@@ -6,7 +6,7 @@
 /*   By: jetan <jetan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 17:00:42 by jetan             #+#    #+#             */
-/*   Updated: 2024/12/16 17:41:04 by jetan            ###   ########.fr       */
+/*   Updated: 2024/12/16 18:00:16 by jetan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	destroy_all(t_data *data)
 	}
 }
 
-void	create_thread(t_philo *philo)
+void	create_thread(t_philo *philo, t_data *data)
 {
 	int	i;
 
@@ -36,6 +36,7 @@ void	create_thread(t_philo *philo)
 	{
 		philo[i].thread = pthread_create(&philo[i].thread, NULL, &philo_routine,
 								   &philo[i]);
+				destroy_all(data);
 		i++;
 	}
 	i = 0;
@@ -98,6 +99,6 @@ int main(int ac, char **av)
 	init_data(&data, philo);
 	init_fork(&data, philo);
 	init_philo(philo, &data);
-	create_thread(philo);
+	create_thread(philo, &data);
 	sleep(5);
 }

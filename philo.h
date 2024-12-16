@@ -44,7 +44,7 @@ void	init_arg(t_philo *philo, int ac, char **av);
 void	init_data(t_data *data, t_philo *philo);
 void	init_fork(t_data *data, t_philo *philo);
 void	init_philo(t_philo *philo, t_data *data);
-void	create_thread(t_philo *philo);
+void	create_thread(t_philo *philo, t_data *data);
 void	*philo_routine(void *philo);
 
 int	ft_isdigit(const char *str);
