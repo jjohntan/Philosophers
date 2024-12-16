@@ -50,6 +50,8 @@ void	*philo_routine(void *philo);
 int	ft_isdigit(const char *str);
 int	ft_atoi(const char *str);
 size_t	get_current_time(void);
+void	print_status(t_philo *philo, int id, char *str);
+void	destroy_all(t_data *data);
 
 void	ft_eat(t_philo *philo);
 int	ft_usleep(size_t milliseconds);

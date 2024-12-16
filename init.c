@@ -6,7 +6,7 @@
 /*   By: jetan <jetan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:40:30 by jetan             #+#    #+#             */
-/*   Updated: 2024/12/14 18:59:33 by jetan            ###   ########.fr       */
+/*   Updated: 2024/12/16 17:44:31 by jetan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	init_philo(t_philo *philo, t_data *data)
 	int	i;
 
 	i = 0;
-	printf("%d\n", philo->num_of_philo);
 	while (i < philo->num_of_philo)
 	{
 		philo[i].id = i + 1;
@@ -48,8 +47,8 @@ void	init_fork(t_data *data, t_philo *philo)
 	i = 0;
 	while (i < philo->num_of_philo)
 	{
-		philo->l_fork = &forks[i];
-		philo->r_fork = &forks[(i + 1) % philo->num_of_philo];
+		philo[i].l_fork = &forks[i];
+		philo[i].r_fork = &forks[(i + 1) % philo->num_of_philo];
 		i++;
 	}
 	data->forks = forks;

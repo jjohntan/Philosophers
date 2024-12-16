@@ -6,11 +6,26 @@
 /*   By: jetan <jetan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 17:00:42 by jetan             #+#    #+#             */
-/*   Updated: 2024/12/13 18:48:43jetan            ###   ########.fr       */
+/*   Updated: 2024/12/16 17:41:04 by jetan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	destroy_all(t_data *data)
+{
+	int	i;
+	
+	i = 0;
+	pthread_mutex_destroy(&data->write_lock);
+	pthread_mutex_destroy(&data->meal_lock);
+	pthread_mutex_destroy(&data->dead_lock);
+	while (i < data->philos->num_of_philo)
+	{
+		pthread_mutex_destroy(&data->forks[i]);
+		i++;
+	}
+}
 
 void	create_thread(t_philo *philo)
 {
@@ -41,30 +56,6 @@ void	print_status(t_philo *philo, int id, char *str)
 	pthread_mutex_unlock(philo->write_lock);
 }
 
-void	ft_sleep(t_philo *philo)
-{
-	print_status(philo, philo->id, "is sleeping");
-	ft_usleep(philo->time_to_sleep);
-}
-
-void	ft_eat(t_philo *philo)
-{
-	pthread_mutex_lock(philo->r_fork);
-	print_status(philo, philo->id, "has taken a fork");
-	pthread_mutex_lock(philo->l_fork);
-	print_status(philo, philo->id, "has taken a fork");
-	print_status(philo, philo->id, "is eating");
-	pthread_mutex_lock(philo->meal_lock);
-	philo->eating = 1;
-	philo->last_meal = get_current_time();
-	philo->meals_eaten++;
-	philo->eating = 0;
-	pthread_mutex_unlock(philo->meal_lock);
-	ft_usleep(philo->time_to_eat);
-	pthread_mutex_unlock(philo->l_fork);
-	pthread_mutex_unlock(philo->r_fork);
-}
-
 int	done_loop(t_philo *philo)
 {
 	pthread_mutex_lock(philo->dead_lock);
@@ -81,13 +72,13 @@ void	*philo_routine(void *data)
 	philo = (t_philo *)data;
 	if (philo->id % 2 == 0)
 		ft_usleep(1);
-	while (1)
+	while (!done_loop(philo))
 	{
 		ft_eat(philo);
 		ft_sleep(philo);
 		print_status(philo, philo->id, "is thinking");
 	}
-	return (data);
+	return NULL;
 }
 
 int main(int ac, char **av)
