@@ -58,4 +58,9 @@ int	ft_usleep(size_t milliseconds);
 void	ft_sleep(t_philo *philo);
 int	done_loop(t_philo *philo);
 
+void	*monitor(void *data);
+int	check_dead(t_philo *philo);
+int	philo_dead(t_philo *philo);
+int	check_ate(t_philo *philo);
+
 #endif

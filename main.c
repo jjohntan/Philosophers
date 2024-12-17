@@ -29,9 +29,12 @@ void	destroy_all(t_data *data)
 
 void	create_thread(t_philo *philo, t_data *data)
 {
-	int	i;
+	pthread_t	philo_checker;
+	int			i;
 
 	i = 0;
+	// if (pthread_create(&philo_checker, NULL, &monitor, philo) != 0)
+	// 	destroy_all(data);
 	while (i < philo->num_of_philo)
 	{
 		philo[i].thread = pthread_create(&philo[i].thread, NULL, &philo_routine,
@@ -39,6 +42,8 @@ void	create_thread(t_philo *philo, t_data *data)
 				destroy_all(data);
 		i++;
 	}
+	// if (pthread_join(philo_checker, NULL) != 0)
+	// 	destroy_all(data);
 	i = 0;
 	while (i < philo->num_of_philo)
 	{
@@ -53,7 +58,8 @@ void	print_status(t_philo *philo, int id, char *str)
 	
 	time = get_current_time() - philo->start_time;
 	pthread_mutex_lock(philo->write_lock);
-	printf("%d %d %s\n", time, id, str);
+	if (!done_loop(philo))
+		printf("%d %d %s\n", time, id, str);
 	pthread_mutex_unlock(philo->write_lock);
 }
 
@@ -100,5 +106,6 @@ int main(int ac, char **av)
 	init_fork(&data, philo);
 	init_philo(philo, &data);
 	create_thread(philo, &data);
+	// destroy_all(&data);
 	sleep(5);
 }
