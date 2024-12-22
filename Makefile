@@ -1,13 +1,14 @@
 NAME = philo
 
 
-SRCS = main.c \
-	   ft_atoi.c \
+SRCS = philo.c \
+	   ft_atol.c \
 	   ft_isdigit.c \
-	   init.c \
-	   monitor.c \
+	   utils.c \
+	   thread.c \
 	   routine.c \
-	   utils.c
+	   init.c \
+	   monitor.c
 
 
 OBJS = $(SRCS:.c=.o)

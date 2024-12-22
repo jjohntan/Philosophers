@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jetan <jetan@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 17:25:05 by jetan             #+#    #+#             */
-/*   Updated: 2023/11/05 20:08:12 by jetan            ###   ########.fr       */
+/*   Updated: 2024/12/20 17:02:20 by jetan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ft_atoi(const char *str)
+long	ft_atol(const char *str)
 {
-	int	result;
-	int	sign;
+	long	result;
+	int		sign;
 
 	result = 0;
 	sign = 1;
@@ -41,7 +41,7 @@ int	main(void)
 {
 	char	*str;
 	str = "  -1234ab567";
-	printf("%d \n", ft_atoi(str));
+	printf("%d \n", ft_atol(str));
 	printf("%d \n", atoi(str));
 	return (0);
 }*/
